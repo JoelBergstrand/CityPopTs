@@ -13,15 +13,15 @@ export default function HomeScreen({ navigation }: NavigationProp<Routes.Home>):
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => navigation.navigate(Routes.Search, { searchType: Searches.City })}>
-                <Text style={styles.text}>Search By City</Text>
+                <Text style={styles.text}>SEARCH BY CITY</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => navigation.navigate(Routes.Search, { searchType: Searches.Country })}>
-                <Text style={styles.text}>Search By Country</Text>
+                <Text style={styles.text}>SEARCH BY COUNTRY</Text>
             </TouchableOpacity>
             {/* Use a light status bar on iOS to account for the black space above the modal */}
-            <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
+            <StatusBar style={'dark'} />
         </View>
     );
 }
@@ -30,11 +30,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
+        padding: 10,
     },
     title: {
-        fontSize: 20,
+        fontSize: 30,
         fontWeight: 'bold',
+        marginTop: 120,
+        marginBottom: 50
     },
     separator: {
         marginVertical: 30,
@@ -42,9 +45,9 @@ const styles = StyleSheet.create({
         width: '80%',
     },
     button: {
-        margin: 10,
+        margin: 3,
         borderColor: 'black',
-        height: 40,
+        height: 50,
         width: '90%',
         borderWidth: 1,
         padding: 10,

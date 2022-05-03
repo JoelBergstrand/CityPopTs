@@ -17,7 +17,7 @@ const Navigation = (): React.ReactElement => {
                     headerTitle: "CityPop",
                 }}
             >
-                <Stack.Screen name={Routes.Home} component={HomeScreen} />
+                <Stack.Screen name={Routes.Home} component={HomeScreen} options={{ headerShown: false }} />
                 <Stack.Screen
                     name={Routes.Search}
                     component={SearchScreen}

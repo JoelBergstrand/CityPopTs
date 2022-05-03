@@ -8,15 +8,17 @@ type ListScreenProp = NavigationProp<Routes.List>
 export default function ListScreen({ route, navigation }: ListScreenProp) {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{route.params.country}</Text>
+            <Text style={styles.title}>{route.params.country.toLocaleUpperCase()}</Text>
             {route.params.cities.map((c, index) => {
                 return <TouchableOpacity
                     key={index}
+                    style={styles.entry}
                     onPress={() => navigation.navigate(Routes.Show, { city: c })}
                 >
-                    <Text style={styles.entry}>{c.name}</Text>
+                    <Text style={styles.entryText}>{c.toponymName}</Text>
                 </TouchableOpacity>
             })}
+            <StatusBar style={'dark'} />
         </View>
     );
 }
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: 'bold',
-        margin: 20,
+        marginBottom: 80,
     },
     separator: {
         marginVertical: 30,
@@ -38,9 +40,12 @@ const styles = StyleSheet.create({
         width: '80%',
     },
     entry: {
-        margin: 5,
+        margin: 1,
         borderWidth: 1,
         padding: 5,
-        width: '80%'
+        width: '80%',
+    },
+    entryText: {
+        textAlign: 'center',
     }
 });

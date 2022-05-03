@@ -14,7 +14,7 @@ export enum Searches {
 
 export type City = {
   population: number,
-  name: string,
+  toponymName: string,
 }
 
 export type StackParamList = {

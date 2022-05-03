@@ -9,12 +9,12 @@ type ShowScreenProp = NavigationProp<Routes.Show>
 export default function ShowScreen({ route, navigation }: ShowScreenProp) {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{route.params.city.name}</Text>
+            <Text style={styles.title}>{route.params.city.toponymName.toLocaleUpperCase()}</Text>
             <View>
                 <Text>POPULATION</Text>
                 <Text>{route.params.city.population}</Text>
             </View>
-            <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
+            <StatusBar style={'dark'} />
         </View>
     );
 }
@@ -28,10 +28,5 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: 'bold',
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%',
     },
 });

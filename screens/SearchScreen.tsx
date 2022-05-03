@@ -14,6 +14,9 @@ function capitalize(text: string): string {
     return text[0].toLocaleUpperCase() + text.slice(1)
 }
 
+function isObject(obj: any): boolean {
+    return typeof obj[0] === 'object'
+}
 
 
 export default function SearchScreen({ route, navigation }: SearchScreenProp) {
@@ -33,29 +36,33 @@ export default function SearchScreen({ route, navigation }: SearchScreenProp) {
             <TouchableOpacity
                 onPress={() => {
                     const url = buildUrl(query, route.params.searchType)
+
                     if (!url) Alert.alert(`No such country could be found`)
                     else {
                         get<City>(url)
                             .then(data => {
-                                if (route.params.searchType == Searches.City) {
-                                    navigation.navigate(Routes.Show, { city: data[0] })
+                                console.log(isObject(data))
+                                if (isObject(data)) {
+                                    if (route.params.searchType == Searches.City) {
+                                        navigation.navigate(Routes.Show, { city: data[0] })
+                                    }
+                                    else {
+                                        navigation.navigate(Routes.List, { country: query, cities: data })
+                                    }
                                 }
                                 else {
-                                    navigation.navigate(Routes.List, { country: query, cities: data })
+                                    Alert.alert("No such place exists in our database")
                                 }
+
                             })
-                            .catch(error => Alert.alert(error))
-
-
+                            .catch(error => console.log(error))
                     }
-                }
-
-                }
+                }}
             >
                 <Ionicons name="search-circle-outline" size={50} color="black" />
             </TouchableOpacity>
             {/* Use a light status bar on iOS to account for the black space above the modal */}
-            <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
+            <StatusBar style={'dark'} />
         </View >
     );
 }

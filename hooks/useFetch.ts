@@ -9,11 +9,8 @@ export default function useFetch() {
     const API_URL = `http://api.geonames.org/searchJSON?`
 
     /*
-    *  Builds the searchURL sent to the API for either Country and City with the requested query corresponding to placename
+    *  Builds the url for the query sent to the API for either Country and City with the requested query corresponding to placename
     */
-
-
-
 
     const buildUrl = (query: string, type: string): string | undefined => {
         const USR_NAME = `weknowit`
@@ -27,8 +24,8 @@ export default function useFetch() {
         }
     }
 
-
     function get<TResponse>(url: string): Promise<TResponse[]> {
+
         setIsLoading(true)
         return new Promise((resolve, reject) => {
             fetch(url)
