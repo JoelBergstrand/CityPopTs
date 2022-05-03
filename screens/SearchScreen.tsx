@@ -39,12 +39,10 @@ export default function SearchScreen({ route, navigation }: SearchScreenProp) {
                     onPress={() => {
                         if (query.length > 0) {
                             const url = buildUrl(query, route.params.searchType)
-
                             if (!url) Alert.alert(`No such country could be found`)
                             else {
                                 get<City>(url)
                                     .then(data => {
-                                        console.log(isObject(data))
                                         if (isObject(data)) {
                                             if (route.params.searchType == Searches.City) {
                                                 navigation.navigate(Routes.Show, { city: data[0] })
@@ -66,7 +64,6 @@ export default function SearchScreen({ route, navigation }: SearchScreenProp) {
                     <Ionicons name="search-circle-outline" size={50} color="black" />
                 </TouchableOpacity>
             }
-            {/* Use a light status bar on iOS to account for the black space above the modal */}
             <StatusBar style={'dark'} />
         </View >
     );
@@ -76,11 +73,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
     },
     title: {
-        fontSize: 20,
+        fontSize: 30,
         fontWeight: 'bold',
+        marginTop: 120,
+        marginBottom: 40
     },
     separator: {
         marginVertical: 30,

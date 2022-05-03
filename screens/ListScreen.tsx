@@ -27,23 +27,19 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
     },
     title: {
-        fontSize: 20,
+        fontSize: 30,
         fontWeight: 'bold',
-        marginBottom: 80,
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%',
+        marginTop: 120,
+        marginBottom: 50
     },
     entry: {
         margin: 1,
         borderWidth: 1,
-        padding: 5,
-        width: '80%',
+        padding: 7,
+        width: '90%',
     },
     entryText: {
         textAlign: 'center',
