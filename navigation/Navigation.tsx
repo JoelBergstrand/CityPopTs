@@ -6,11 +6,17 @@ import HomeScreen from '../screens/HomeScreen'
 import SearchScreen from '../screens/SearchScreen'
 import ListScreen from '../screens/ListScreen'
 import ShowScreen from '../screens/ShowScreen'
+import { Alert } from 'react-native'
 
 const Navigation = (): React.ReactElement => {
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Navigator
+                screenOptions={{
+                    headerShown: true,
+                    headerTitle: "CityPop",
+                }}
+            >
                 <Stack.Screen name={Routes.Home} component={HomeScreen} />
                 <Stack.Screen
                     name={Routes.Search}

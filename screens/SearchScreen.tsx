@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Platform, StyleSheet, Button, Alert, TextInput } from 'react-native';
+import { Platform, StyleSheet, Button, Alert, TextInput, Text, View, TouchableOpacity } from 'react-native';
 
-import { Text, View } from '../components/Themed';
+import { Ionicons } from '@expo/vector-icons';
 import { Routes } from '../navigation/routes';
 import { NavigationProp } from '../navigation/types';
 
@@ -18,16 +18,18 @@ export default function SearchScreen({ route, navigation }: SearchScreenProp) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Search By {capitalize(route.params.searchType)} </Text>
-            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+            <View style={styles.separator} />
             <TextInput
                 style={styles.input}
                 value={text}
+                placeholder={`Enter a ${route.params.searchType}`}
                 onChangeText={onChangeText}
             />
-            <Button
-                title={"Submit"}
+            <TouchableOpacity
                 onPress={() => Alert.alert(`In button ${route.params.searchType} searchtype`)}
-            />
+            >
+                <Ionicons name="search-circle-outline" size={50} color="black" />
+            </TouchableOpacity>
             {/* Use a light status bar on iOS to account for the black space above the modal */}
             <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
         </View>
@@ -51,8 +53,13 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
+        width: '90%',
         margin: 12,
         borderWidth: 1,
         padding: 10,
+        textAlign: 'center'
     },
+    button: {
+        width: '30%'
+    }
 });

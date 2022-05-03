@@ -1,8 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Platform, StyleSheet, Button, Alert } from 'react-native';
+import { Platform, StyleSheet, Button, Text, View, TouchableOpacity } from 'react-native';
 
-import { Text, View } from '../components/Themed';
 import { Routes } from '../navigation/routes';
 import { NavigationProp } from '../navigation/types';
 
@@ -10,14 +9,17 @@ export default function HomeScreen({ navigation }: NavigationProp<Routes.Home>):
     return (
         <View style={styles.container}>
             <Text style={styles.title}>CityPop</Text>
-            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-            <Button
-                title="Search By City"
-                onPress={() => navigation.navigate(Routes.Search, { searchType: "city" })} />
-            <Button
-                title="Search By Country"
-                onPress={() => navigation.navigate(Routes.Search, { searchType: "country" })} />
-
+            <View style={styles.separator} />
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate(Routes.Search, { searchType: "city" })}>
+                <Text style={styles.text}>Search By City</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate(Routes.Search, { searchType: "country" })}>
+                <Text style={styles.text}>Search By Country</Text>
+            </TouchableOpacity>
             {/* Use a light status bar on iOS to account for the black space above the modal */}
             <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
         </View>
@@ -39,4 +41,15 @@ const styles = StyleSheet.create({
         height: 1,
         width: '80%',
     },
+    button: {
+        margin: 10,
+        borderColor: 'black',
+        height: 40,
+        width: '90%',
+        borderWidth: 1,
+        padding: 10,
+    },
+    text: {
+        textAlign: 'center'
+    }
 });
