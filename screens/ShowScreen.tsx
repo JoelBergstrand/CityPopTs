@@ -1,21 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet, Button, Alert } from 'react-native';
+import { Platform, StyleSheet, Button, Alert, Text, View } from 'react-native';
 
-import { Text, View } from '../components/Themed';
+import { Routes } from '../navigation/routes';
+import { NavigationProp } from '../navigation/types';
 
-export default function ShowScreen({ }) {
+type ShowScreenProp = NavigationProp<Routes.Show>
+
+export default function ShowScreen({ route, navigation }: ShowScreenProp) {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Search By City</Text>
-            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-            <Button
-                title="Search By City"
-                onPress={() => Alert.alert('Search by City')} />
-            <Button
-                title="Search By Country"
-                onPress={() => Alert.alert('Search By Country')} />
-
-            {/* Use a light status bar on iOS to account for the black space above the modal */}
+            <Text style={styles.title}>{route.params.city.name}</Text>
+            <View>
+                <Text>POPULATION</Text>
+                <Text>{route.params.city.population}</Text>
+            </View>
             <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
         </View>
     );

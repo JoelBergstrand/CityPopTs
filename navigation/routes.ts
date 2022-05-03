@@ -7,11 +7,21 @@ export enum Routes {
   Show = 'Show'
 }
 
+export enum Searches {
+  City = 'city',
+  Country = 'country'
+}
+
+export type City = {
+  population: number,
+  name: string,
+}
+
 export type StackParamList = {
   [Routes.Home]: undefined;
   [Routes.Search]: { searchType: string };
-  [Routes.List]: undefined;
-  [Routes.Show]: undefined;
+  [Routes.List]: { country: String, cities: City[] };
+  [Routes.Show]: { city: City };
 }
 
 export const Stack = createNativeStackNavigator<StackParamList>()

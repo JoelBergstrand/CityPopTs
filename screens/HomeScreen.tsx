@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Platform, StyleSheet, Button, Text, View, TouchableOpacity } from 'react-native';
 
-import { Routes } from '../navigation/routes';
+import { Routes, Searches } from '../navigation/routes';
 import { NavigationProp } from '../navigation/types';
 
 export default function HomeScreen({ navigation }: NavigationProp<Routes.Home>): React.ReactElement {
@@ -12,12 +12,12 @@ export default function HomeScreen({ navigation }: NavigationProp<Routes.Home>):
             <View style={styles.separator} />
             <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate(Routes.Search, { searchType: "city" })}>
+                onPress={() => navigation.navigate(Routes.Search, { searchType: Searches.City })}>
                 <Text style={styles.text}>Search By City</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate(Routes.Search, { searchType: "country" })}>
+                onPress={() => navigation.navigate(Routes.Search, { searchType: Searches.Country })}>
                 <Text style={styles.text}>Search By Country</Text>
             </TouchableOpacity>
             {/* Use a light status bar on iOS to account for the black space above the modal */}

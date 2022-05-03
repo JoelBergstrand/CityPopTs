@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { Platform, StyleSheet, Button, Alert, TextInput, Text, View, TouchableOpacity } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
-import { Routes } from '../navigation/routes';
+import { Routes, Searches, City } from '../navigation/routes';
 import { NavigationProp } from '../navigation/types';
+import useFetch from '../hooks/useFetch';
 
 type SearchScreenProp = NavigationProp<Routes.Search>
 
@@ -13,26 +14,49 @@ function capitalize(text: string): string {
     return text[0].toLocaleUpperCase() + text.slice(1)
 }
 
+
+
 export default function SearchScreen({ route, navigation }: SearchScreenProp) {
-    const [text, onChangeText] = useState("")
+    const { get, buildUrl, isLoading } = useFetch()
+    const [query, onChangeQuery] = useState("")
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Search By {capitalize(route.params.searchType)} </Text>
             <View style={styles.separator} />
             <TextInput
                 style={styles.input}
-                value={text}
+                value={query}
                 placeholder={`Enter a ${route.params.searchType}`}
-                onChangeText={onChangeText}
+                onChangeText={onChangeQuery}
             />
             <TouchableOpacity
-                onPress={() => Alert.alert(`In button ${route.params.searchType} searchtype`)}
+                onPress={() => {
+                    const url = buildUrl(query, route.params.searchType)
+                    if (!url) Alert.alert(`No such country could be found`)
+                    else {
+                        get<City>(url)
+                            .then(data => {
+                                if (route.params.searchType == Searches.City) {
+                                    navigation.navigate(Routes.Show, { city: data[0] })
+                                }
+                                else {
+                                    navigation.navigate(Routes.List, { country: query, cities: data })
+                                }
+                            })
+                            .catch(error => Alert.alert(error))
+
+
+                    }
+                }
+
+                }
             >
                 <Ionicons name="search-circle-outline" size={50} color="black" />
             </TouchableOpacity>
             {/* Use a light status bar on iOS to account for the black space above the modal */}
             <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
-        </View>
+        </View >
     );
 }
 
