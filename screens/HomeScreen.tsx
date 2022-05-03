@@ -9,7 +9,6 @@ export default function HomeScreen({ navigation }: NavigationProp<Routes.Home>):
     return (
         <View style={styles.container}>
             <Text style={styles.title}>CityPop</Text>
-            <View style={styles.separator} />
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => navigation.navigate(Routes.Search, { searchType: Searches.City })}>
@@ -37,22 +36,18 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         marginTop: 120,
-        marginBottom: 50
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%',
+        marginBottom: 80
     },
     button: {
         margin: 3,
         borderColor: 'black',
-        height: 50,
         width: '90%',
+        height: '7%',
         borderWidth: 1,
-        padding: 10,
+        padding: '4.5%'
+
     },
     text: {
-        textAlign: 'center'
+        textAlign: 'center',
     }
 });

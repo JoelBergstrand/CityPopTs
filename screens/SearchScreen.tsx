@@ -9,11 +9,6 @@ import useFetch from '../hooks/useFetch';
 
 type SearchScreenProp = NavigationProp<Routes.Search>
 
-function capitalize(text: string): string {
-    if (text.length < 1) return text
-    return text[0].toLocaleUpperCase() + text.slice(1)
-}
-
 function isObject(obj: any): boolean {
     return typeof obj[0] === 'object'
 }
@@ -25,7 +20,7 @@ export default function SearchScreen({ route, navigation }: SearchScreenProp) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Search By {capitalize(route.params.searchType)} </Text>
+            <Text style={styles.title}>SEARCH BY {route.params.searchType.toLocaleUpperCase()} </Text>
             <View style={styles.separator} />
             <TextInput
                 style={styles.input}
