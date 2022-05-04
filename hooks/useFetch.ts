@@ -8,21 +8,31 @@ export default function useFetch() {
 
     const API_URL = `http://api.geonames.org/searchJSON?`
 
+    function spacesToDash(s: string): string {
+        return s.replace(/\s+/g, '-')
+    }
+
     /*
     *  Builds the url for the query sent to the API for either Country and City with the requested query corresponding to placename
     */
-
     const buildUrl = (query: string, type: string): string | undefined => {
         const USR_NAME = `weknowit`
+        const baseUrl = `${API_URL}q=${spacesToDash(query)}&username=${USR_NAME}`
         if (type === "city") {
-            return `${API_URL}name_equals=${query}&maxRows=10&featureCode=PPLA&featureCode=PPLC&username=${USR_NAME}`
+            return `${baseUrl}&maxRows=10`
         }
         else {
             const cc: string | undefined = getCountryCode(query.toLowerCase())
-            if (cc) return `${API_URL}q=${query}&country=${cc}&orderby=population&maxRows=10&featureClass=P&username=${USR_NAME}`
+            if (cc) return `${baseUrl}&country=${cc}&orderby=population&maxRows=10&featureClass=P`
             return undefined
         }
     }
+
+    /**
+     * 
+     * @param url The url for the request
+     * @returns Promise with response from api in array of type
+     */
 
     function get<TResponse>(url: string): Promise<TResponse[]> {
 
