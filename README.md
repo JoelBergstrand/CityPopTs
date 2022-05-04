@@ -5,6 +5,7 @@ CityPop is a small and easy to use application for finding the populations of ci
 ### Technologies
 The following technologies are used in the application. 
 - Node v16.14.2
+- Node Package Manager 8.8.0
 - React Native v0.64.3
 - Expo 5.4.3
 - TypeScript 4.6.4
