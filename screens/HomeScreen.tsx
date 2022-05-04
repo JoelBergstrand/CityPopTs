@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'flex-start',
-        padding: 10,
     },
     title: {
         fontSize: 30,
