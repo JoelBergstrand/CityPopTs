@@ -1,6 +1,7 @@
 # CityPop
 ### About
 CityPop is a small and easy to use application for finding the populations of cities around the world. You can search directly on a city name or a particular country to access the largest cities of that country.
+
 ### Technologies
 The following technologies are used in the application. 
 - Node v16.14.2
@@ -32,3 +33,6 @@ Install the Expo Go client app on your mobile device and scan the qr-code
 
 ### Author
 Joel Bergstrand
+
+
+<img src="https://github.com/JoelBergstrand/CityPopTs/blob/main/citypopscreencap.jpg" width="128" height="282">
