@@ -1,36 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Platform, StyleSheet, Button, Alert, TextInput, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
-
+import { StyleSheet, Alert, TextInput, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Routes, Searches, City } from '../navigation/routes';
-import { NavigationProp } from '../navigation/types';
-import useFetch from '../hooks/useFetch';
 
-type SearchScreenProp = NavigationProp<Routes.Search>
+import { Routes, Searches, City, NavigationProp } from '../navigation/types';
+import useFetch from '../hooks/useFetch';
 
 function isObject(obj: any): boolean {
     return typeof obj[0] === 'object'
 }
 
-
-export default function SearchScreen({ route, navigation }: SearchScreenProp) {
+/**
+ * Dynamically builds the search screen depending on if City or Country is being searched. 
+ * Alerts user of errors if country or city is invalied. 
+ * @param param0 Takes a Navigation Prop as defined in Routes
+ * @returns Search Screen
+ */
+export default function SearchScreen({ route, navigation }: NavigationProp<Routes.Search>) {
     const { get, buildUrl, isLoading } = useFetch()
     const [query, onChangeQuery] = useState("")
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>SEARCH BY {route.params.searchType.toLocaleUpperCase()} </Text>
-            <View style={styles.separator} />
             <TextInput
                 style={styles.input}
                 value={query}
                 placeholder={`Enter a ${route.params.searchType}`}
                 onChangeText={onChangeQuery}
             />
-
             {isLoading ?
-                <ActivityIndicator size="large" color="#0000ff" /> : <TouchableOpacity
+                <ActivityIndicator size="large" color="#0000ff" />
+                : <TouchableOpacity
                     onPress={() => {
                         if (query.length > 0) {
                             const url = buildUrl(query, route.params.searchType)
@@ -59,7 +59,6 @@ export default function SearchScreen({ route, navigation }: SearchScreenProp) {
                     <Ionicons name="search-circle-outline" size={50} color="black" />
                 </TouchableOpacity>
             }
-            <StatusBar style={'dark'} />
         </View >
     );
 }
@@ -75,11 +74,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginTop: 120,
         marginBottom: 40
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%',
     },
     input: {
         height: 40,

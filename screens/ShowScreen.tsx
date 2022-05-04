@@ -1,16 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet, Button, Alert, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-import { Routes } from '../navigation/routes';
-import { NavigationProp } from '../navigation/types';
-
-type ShowScreenProp = NavigationProp<Routes.Show>
+import { Routes, NavigationProp } from '../navigation/types';
 
 function numberWithSpaces(x: number): string {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
-export default function ShowScreen({ route, navigation }: ShowScreenProp) {
+/**
+ * Presents the population of a city to the user.
+ * @param param0 Takes a Navigation Prop as defined in Routes
+ * @returns Show Screen
+ */
+export default function ShowScreen({ route }: NavigationProp<Routes.Show>) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{route.params.city.toponymName.toLocaleUpperCase()}</Text>
@@ -18,7 +19,6 @@ export default function ShowScreen({ route, navigation }: ShowScreenProp) {
                 <Text style={styles.entryTitle}>POPULATION</Text>
                 <Text style={styles.entryValue}>{numberWithSpaces(route.params.city.population)}</Text>
             </View>
-            <StatusBar style={'dark'} />
         </View>
     );
 }

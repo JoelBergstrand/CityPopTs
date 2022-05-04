@@ -5,7 +5,6 @@ export default function useFetch() {
 
     const [isLoading, setIsLoading] = useState(false)
 
-
     const API_URL = `http://api.geonames.org/searchJSON?`
 
     function spacesToDash(s: string): string {
@@ -29,11 +28,10 @@ export default function useFetch() {
     }
 
     /**
-     * 
+     * Gets data from api 
      * @param url The url for the request
-     * @returns Promise with response from api in array of type
+     * @returns Promise with response from api in array of type TResponse
      */
-
     function get<TResponse>(url: string): Promise<TResponse[]> {
 
         setIsLoading(true)

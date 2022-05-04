@@ -1,16 +1,19 @@
 import React from 'react'
+import { Entypo } from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 
-import { Stack, Routes } from './routes'
+import { Stack, Routes } from './types'
 import HomeScreen from '../screens/HomeScreen'
 import SearchScreen from '../screens/SearchScreen'
 import ListScreen from '../screens/ListScreen'
 import ShowScreen from '../screens/ShowScreen'
-import { Entypo } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native'
 
+/**
+ * Builds stack navigator for the application and chnages the back button to a bolder arrow
+ * @returns React Navigation navigator 
+ */
 const Navigation = (): React.ReactElement => {
-
     return (
         <NavigationContainer>
             <Stack.Navigator
@@ -39,8 +42,6 @@ const Navigation = (): React.ReactElement => {
         </NavigationContainer >
     )
 }
-
-
 
 export default Navigation
 

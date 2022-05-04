@@ -1,11 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet, Button, Alert, View, Text, Touchable, TouchableOpacity } from 'react-native';
-import { Routes } from '../navigation/routes';
-import { NavigationProp } from '../navigation/types';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-type ListScreenProp = NavigationProp<Routes.List>
+import { Routes, NavigationProp } from '../navigation/types';
 
-export default function ListScreen({ route, navigation }: ListScreenProp) {
+/**
+ * Builds the list screen from data fetched from api. Presenting all available entries.
+ * @param param0 Takes a Navigation Prop as defined in Routes
+ * @returns List Screen
+ */
+export default function ListScreen({ route, navigation }: NavigationProp<Routes.List>) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{route.params.country.toLocaleUpperCase()}</Text>
@@ -18,7 +20,6 @@ export default function ListScreen({ route, navigation }: ListScreenProp) {
                     <Text style={styles.entryText}>{c.toponymName}</Text>
                 </TouchableOpacity>
             })}
-            <StatusBar style={'dark'} />
         </View>
     );
 }
