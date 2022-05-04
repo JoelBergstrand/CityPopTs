@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Alert, TextInput, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { Routes, Searches, City, NavigationProp } from '../navigation/types';
 import useFetch from '../hooks/useFetch';
@@ -19,6 +20,12 @@ export default function SearchScreen({ route, navigation }: NavigationProp<Route
     const { get, buildUrl, isLoading } = useFetch()
     const [query, onChangeQuery] = useState("")
 
+    useFocusEffect(
+        React.useCallback(() => {
+            console.log("here")
+            onChangeQuery("")
+        }, [])
+    )
     return (
         <View style={styles.container}>
             <Text style={styles.title}>SEARCH BY {route.params.searchType.toLocaleUpperCase()} </Text>
