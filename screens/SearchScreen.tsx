@@ -5,10 +5,20 @@ import { useFocusEffect } from '@react-navigation/native';
 
 import { Routes, Searches, City, NavigationProp } from '../navigation/types';
 import useFetch from '../hooks/useFetch';
+import { getCountryCode } from '../constants/countryCodes';
 
 function isObject(obj: any): boolean {
     return typeof obj[0] === 'object'
 }
+
+function prepareQuery(q: string): string {
+    return q.trim()
+}
+
+function hasNumber(q: string): boolean {
+    return /\d/.test(q)
+}
+
 
 /**
  * Dynamically builds the search screen depending on if City or Country is being searched. 
@@ -39,10 +49,20 @@ export default function SearchScreen({ route, navigation }: NavigationProp<Route
                 <ActivityIndicator size="large" color="#0000ff" />
                 : <TouchableOpacity
                     onPress={() => {
-                        if (query.length > 0) {
-                            const url = buildUrl(query, route.params.searchType)
+                        var trimmedQuery = prepareQuery(query)
+                        if ((trimmedQuery.length > 0) && !hasNumber(trimmedQuery)) {
+                            const url = buildUrl(trimmedQuery, route.params.searchType)
                             if (!url) Alert.alert(`No such country could be found`)
                             else {
+                                // Checks if input for city search is a known country and prompts user if that is the case
+                                if (
+                                    (route.params.searchType === Searches.City) &&
+                                    getCountryCode(trimmedQuery.toLowerCase())
+                                ) {
+                                    Alert.alert("It's not possible to search for a country at this screen")
+                                    onChangeQuery("")
+                                    return
+                                }
                                 get<City>(url)
                                     .then(data => {
                                         if (isObject(data)) {
@@ -50,7 +70,7 @@ export default function SearchScreen({ route, navigation }: NavigationProp<Route
                                                 navigation.navigate(Routes.Show, { city: data[0] })
                                             }
                                             else {
-                                                navigation.navigate(Routes.List, { country: query, cities: data })
+                                                navigation.navigate(Routes.List, { country: trimmedQuery, cities: data })
                                             }
                                         }
                                         else {
@@ -59,6 +79,12 @@ export default function SearchScreen({ route, navigation }: NavigationProp<Route
 
                                     })
                                     .catch(error => console.log(error))
+                            }
+                        }
+                        else {
+                            if (hasNumber(trimmedQuery)) {
+                                Alert.alert("Query is invailed - contains numbers")
+                                onChangeQuery("")
                             }
                         }
                     }}
