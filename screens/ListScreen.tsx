@@ -10,7 +10,7 @@ import { Routes, NavigationProp } from '../navigation/types';
 export default function ListScreen({ route, navigation }: NavigationProp<Routes.List>) {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{route.params.country.toLocaleUpperCase()}</Text>
+            <Text style={styles.title} testID='Title'>{route.params.country.toLocaleUpperCase()}</Text>
             {route.params.cities.map((c, index) => {
                 return <TouchableOpacity
                     key={index}

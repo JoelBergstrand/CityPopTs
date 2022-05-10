@@ -14,10 +14,10 @@ function numberWithSpaces(x: number): string {
 export default function ShowScreen({ route }: NavigationProp<Routes.Show>) {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{route.params.city.toponymName.toLocaleUpperCase()}</Text>
+            <Text style={styles.title} testID='Title'>{route.params.city.toponymName.toLocaleUpperCase()}</Text>
             <View style={styles.entryContainer}>
                 <Text style={styles.entryTitle}>POPULATION</Text>
-                <Text style={styles.entryValue}>{numberWithSpaces(route.params.city.population)}</Text>
+                <Text style={styles.entryValue} testID='Population'>{numberWithSpaces(route.params.city.population)}</Text>
             </View>
         </View>
     );

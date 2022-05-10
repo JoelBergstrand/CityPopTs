@@ -32,6 +32,13 @@ Run npm
 
 Install the Expo Go client app on your mobile device and scan the qr-code
 
+### Testing
+The projects uses unit tests provided by Jest and Enzyme. Testing all screens so they display correctly and works as planned. 
+
+Run tests by: 
+
+`npm test`
+
 ### Author
 Joel Bergstrand
 

@@ -19,7 +19,6 @@ function hasNumber(q: string): boolean {
     return /\d/.test(q)
 }
 
-
 /**
  * Dynamically builds the search screen depending on if City or Country is being searched. 
  * Alerts user of errors if country or city is invalied. 
@@ -32,10 +31,10 @@ export default function SearchScreen({ route, navigation }: NavigationProp<Route
 
     useFocusEffect(
         React.useCallback(() => {
-            console.log("here")
             onChangeQuery("")
         }, [])
     )
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>SEARCH BY {route.params.searchType.toLocaleUpperCase()} </Text>

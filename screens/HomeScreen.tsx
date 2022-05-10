@@ -13,6 +13,7 @@ export default function HomeScreen({ navigation }: NavigationProp<Routes.Home>):
     function SearchButton(searchType: string): React.ReactElement {
         return <TouchableOpacity
             style={styles.button}
+            testID={searchType}
             onPress={() => navigation.navigate(Routes.Search, { searchType: searchType })}>
             <Text style={styles.text}>SEARCH BY {searchType.toLocaleUpperCase()}</Text>
         </TouchableOpacity>
@@ -26,8 +27,6 @@ export default function HomeScreen({ navigation }: NavigationProp<Routes.Home>):
         </View>
     );
 }
-
-
 
 const styles = StyleSheet.create({
     container: {
